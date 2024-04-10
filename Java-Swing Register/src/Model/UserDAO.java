@@ -43,10 +43,4 @@ public class UserDAO {
             e.getStackTrace();
         }
     }
-
-    // Test
-    public static void main(String[] args) {
-        UserDAO u = new UserDAO();
-        u.selectUser();
-    }
 }
