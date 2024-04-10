@@ -8,17 +8,29 @@ public class UserDAO {
         // DB 유틸함수 호출
         Connection conn = ConnectDB.initDB();
         System.out.println(ConnectDB.initDB());
+
         try {
             if (conn != null) {
-                // Test: Query
-                String sql = "SELECT * FROM java_swing_register_member";
+                String sql = "SELECT * FROM java_swing_register_member"; // Test: Query
+                Statement statement = conn.createStatement(); // Test: Create Statement Obj
+                ResultSet resultSet = statement.executeQuery(sql); // Test: Query Start
 
-                // Test: Create Statement Obj
-                Statement statement = conn.createStatement();
+                while (resultSet.next()) {
+                    // ResultSet에서 각 컬럼의 값을 읽어옴
+                    int userNumber = resultSet.getInt("user_no");
+                    String userId = resultSet.getString("user_id");
+                    String password = resultSet.getString("user_pwd");
+                    String address = resultSet.getString("address");
+                    String gender = resultSet.getString("gender");
+                    String phone = resultSet.getString("phone");
+                    String birth = resultSet.getString("birth");
 
-                // Test: Query Start
-                ResultSet resultSet = statement.executeQuery(sql);
-                System.out.println("data: " + resultSet);
+                    // 읽어온 값을 사용하여 UserDTO 객체를 생성
+                    UserDTO user = new UserDTO(userNumber, userId, password, address, gender, phone, birth);
+
+                    // Test: UserDTO 객체의 toString 메서드를 호출하여 사용자 정보를 출력
+                    System.out.println(user.toString());
+                }
 
                 resultSet.close();  // 쿼리 결과를 담고 있는 ResultSet 종료
                 statement.close();  // SQL 실행을 위한 Statement 객체 종료
