@@ -1,10 +1,9 @@
 package Model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserDAO {
+    // Test
     public static void main(String[] args) {
         String url = System.getenv("DB_URL");
         String user = System.getenv("DB_USER");
@@ -21,9 +20,18 @@ public class UserDAO {
 
             // 데이터베이스에 연결
             Connection conn = DriverManager.getConnection(url, user, password);
-
             if (conn != null) { // Success: 연결 성공
                 System.out.println("데이터베이스에 성공적으로 연결되었습니다.");
+
+                // Test: Query
+                String sql = "SELECT * FROM java_swing_register_member";
+
+                // Test: Create Statement Obj
+                Statement statement = conn.createStatement();
+
+                // Test: Query Start
+                ResultSet resultSet = statement.executeQuery(sql);
+                System.out.println("data: " + resultSet);
                 conn.close(); // 데이터베이스 연결 종료
             }
         } catch (ClassNotFoundException e) { // Fail: 연결 실패
