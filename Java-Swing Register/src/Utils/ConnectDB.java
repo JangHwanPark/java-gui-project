@@ -25,10 +25,10 @@ public class ConnectDB {
             }
         } catch (ClassNotFoundException e) { // Fail: 연결 실패
             System.out.println("MySQL JDBC 드라이버를 찾을 수 없습니다.");
-            e.printStackTrace();
+            e.getStackTrace();
         } catch (SQLException e) {
             System.out.println("데이터베이스 연결에 실패했습니다.");
-            e.printStackTrace();
+            e.getStackTrace();
         }
 
         return null;
