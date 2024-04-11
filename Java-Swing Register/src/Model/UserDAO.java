@@ -12,7 +12,7 @@ public class UserDAO {
     }
 
     /* DB 내 유저 데이터 조회 */
-    private UserDTO selectUserResultSet(ResultSet resultSet) throws SQLException {
+    private static UserDTO selectUserResultSet(ResultSet resultSet) throws SQLException {
         // ResultSet 에서 각 컬럼의 값을 읽어옴
         int userNumber = resultSet.getInt("user_no");
         String userId = resultSet.getString("user_id");
@@ -26,28 +26,33 @@ public class UserDAO {
     }
 
     /* DB 에 유저 데이터 삽입 */
-    private static boolean insertUser(Connection conn, String userId, String password, String address, String gender, String phone, String birth) throws SQLException {
+    public static boolean insertUser(UserDTO user) throws SQLException {
         String sql = "INSERT INTO java_swing_register_member(user_id, user_pwd, address, gender, phone, birth) VALUES (?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, userId);
-            pstmt.setString(2, password);
-            pstmt.setString(3, address);
-            pstmt.setString(4, gender);
-            pstmt.setString(5, phone);
-            pstmt.setString(6, birth);
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, user.getUserId());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setString(3, user.getAddress());
+            pstmt.setString(4, user.getGender());
+            pstmt.setString(5, user.getPhone());
+            pstmt.setString(6, user.getBirth());
+            return pstmt.executeUpdate() > 0;
+        }
+    }
 
-            if (pstmt.executeUpdate() > 0) {
-                System.out.println("회원가입이 완료되었습니다.");
-                return true;
-            } else {
-                System.out.println("회원가입에 실패했습니다.");
-                return false;
-            }
+    /* DB 내 유저 데이터 삭제 */
+    public static boolean deleteUser(String userId) throws SQLException {
+        // sql user_id 의 ? 부분을 동적으로 대체
+        String sql = "DELETE FROM java_swing_register_member WHERE user_id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, userId);
+            return pstmt.executeUpdate() > 0;
         }
     }
 
     // Test: 전체 유저 조회
-    public List<UserDTO> selectAllUserList() {
+    public static List<UserDTO> selectAllUserList() {
         List<UserDTO> users = new ArrayList<>();
         // 데이터 베이스
         try (Connection conn = getConnection()) {
@@ -58,7 +63,7 @@ public class UserDAO {
 
             String sql = "SELECT * FROM java_swing_register_member";
             try (Statement statement = conn.createStatement();
-                    ResultSet resultSet = statement.executeQuery(sql)) {
+                 ResultSet resultSet = statement.executeQuery(sql)) {
 
                 while (resultSet.next()) {
                     // 읽어온 값을 사용하여 UserDTO 객체를 생성하고 배열에 삽입
@@ -73,21 +78,23 @@ public class UserDAO {
         return users;
     }
 
-    /* 사용자 등록(회원가입) */
-    public static boolean registerUser(String userId, String password, String address, String gender, String phone, String birth) {
-        try (Connection conn = getConnection()) {
-            if (conn == null) {
-                System.out.println("데이터베이스 연결에 실패했습니다.");
-                return false;
+    /* 주어진 userId에 해당하는 사용자 조회 */
+    public static UserDTO findUserByName(String userId) throws SQLException {
+        String sql = "SELECT * FROM java_swing_register_member WHERE user_id = ?";
+        try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, userId);
+            try (ResultSet resultSet = pstmt.executeQuery()) {
+                if (resultSet.next()) {
+                    System.out.println("Test OK");
+                    return selectUserResultSet(resultSet);
+                }
             }
-
-            return insertUser(conn, userId, password, address, gender, phone, birth);
-        } catch (Exception e) {
-            System.out.println("오류 발생: " + e.getMessage());
-            e.getStackTrace();
-            return false;
         }
+        System.out.println("Test Fail");
+        return null;  // 사용자가 존재하지 않는 경우
     }
 
-    /**/
+    public static void main(String[] args) throws SQLException {
+        System.out.println(UserDAO.findUserByName("testUser"));
+    }
 }

@@ -10,6 +10,18 @@ public class UserDTO {
     private String phone;
     private String birth;
 
+    // userNumber 를 제외한 생성자
+    public UserDTO(String userId, String password, String address, String gender, String phone, String birth) {
+        this.userId = userId;
+        this.password = password;
+        this.userId = userId;
+        this.password = password;
+        this.address = address;
+        this.gender = gender;
+        this.phone = phone;
+        this.birth = birth;
+    }
+
     // constructor
     public UserDTO(int userNumber, String userId, String password, String address, String gender, String phone, String birth) {
         this.userNumber = userNumber;
@@ -37,10 +49,10 @@ public class UserDTO {
     public String getGender() { return gender; }
     public void setGender(String gender) { this.gender = gender; }
 
-    public String setPhone() { return phone; }
+    public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
 
-    public String setBirth() { return birth; }
+    public String getBirth() { return birth; }
     public void setBirth(String birth) { this.birth = birth; }
 
     // Method(Override): toString - 객체 상태(데이터) 출력, 안쓰면 16진? 출력
