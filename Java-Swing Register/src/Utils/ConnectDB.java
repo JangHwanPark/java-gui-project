@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectDB {
+    public ConnectDB() {}
+
     public static Connection initDB() {
         Connection conn;
 
@@ -19,14 +21,14 @@ public class ConnectDB {
                     System.getenv("DB_PASS")
             );
 
-            if (conn != null) { // Success: 연결 성공
+            if (conn != null) {                     // Success: 연결 성공
                 System.out.println("데이터베이스에 성공적으로 연결되었습니다.");
                 return conn;
             }
-        } catch (ClassNotFoundException e) { // Fail: 연결 실패
+        } catch (ClassNotFoundException e) {        // Fail: 데이터 베이스 드라이버가 없는 경우
             System.out.println("MySQL JDBC 드라이버를 찾을 수 없습니다.");
             e.getStackTrace();
-        } catch (SQLException e) {
+        } catch (SQLException e) {                  // Fail: 데이터 베이스 연결에 실패한 경우
             System.out.println("데이터베이스 연결에 실패했습니다.");
             e.getStackTrace();
         }

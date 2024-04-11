@@ -13,7 +13,6 @@ public class ViewMain extends JFrame {
         panel = new JPanel();
         add(panel);
         placeComponents(panel);
-
         setVisible(true);
     }
 
@@ -41,8 +40,8 @@ public class ViewMain extends JFrame {
     public static void main(String[] args) {
         // Test
         UserDAO u = new UserDAO();
-        u.selectUser();
+        u.selectAllUserList();
 
-        SwingUtilities.invokeLater(ViewMain::new);
+        //SwingUtilities.invokeLater(ViewMain::new);
     }
 }

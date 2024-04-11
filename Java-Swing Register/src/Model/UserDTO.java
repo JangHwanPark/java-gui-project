@@ -53,6 +53,7 @@ public class UserDTO {
                 "\n\taddress: " + address +
                 "\n\tgender: " + gender +
                 "\n\tphone: " + phone +
-                "\n\tbirth: " + birth;
+                "\n\tbirth: " + birth +
+                "\n}";
     }
 }
