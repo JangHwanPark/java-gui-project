@@ -3,6 +3,8 @@ package Model;
 import Utils.ConnectDB;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
     private static Connection getConnection() throws SQLException {
@@ -45,30 +47,30 @@ public class UserDAO {
     }
 
     // Test: 전체 유저 조회
-    public void selectAllUserList() {
+    public List<UserDTO> selectAllUserList() {
+        List<UserDTO> users = new ArrayList<>();
         // 데이터 베이스
         try (Connection conn = getConnection()) {
             if (conn == null) {
                 System.out.println("데이터베이스 연결에 실패했습니다.");
-                return;
+                return users;
             }
 
             String sql = "SELECT * FROM java_swing_register_member";
             try (Statement statement = conn.createStatement();
-                    ResultSet resultSet = statement.executeQuery(sql);) {
+                    ResultSet resultSet = statement.executeQuery(sql)) {
 
                 while (resultSet.next()) {
-                    // 읽어온 값을 사용하여 UserDTO 객체를 생성
+                    // 읽어온 값을 사용하여 UserDTO 객체를 생성하고 배열에 삽입
                     UserDTO user = selectUserResultSet(resultSet);
-
-                    // Test: UserDTO 객체의 toString 메서드를 호출하여 사용자 정보를 출력
-                    System.out.println(user.toString());
+                    users.add(user);
                 }
             }
         } catch (Exception e) {
             System.out.println("오류 발생.");
             e.getStackTrace();
         }
+        return users;
     }
 
     /* 사용자 등록(회원가입) */
@@ -78,9 +80,10 @@ public class UserDAO {
                 System.out.println("데이터베이스 연결에 실패했습니다.");
                 return false;
             }
+
             return insertUser(conn, userId, password, address, gender, phone, birth);
         } catch (Exception e) {
-            System.out.println("오류 발생.");
+            System.out.println("오류 발생: " + e.getMessage());
             e.getStackTrace();
             return false;
         }
