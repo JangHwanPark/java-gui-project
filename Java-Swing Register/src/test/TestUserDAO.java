@@ -9,8 +9,10 @@ import static org.junit.Assert.*;
 @DisplayName("UserDAO 테스트")
 public class TestUserDAO {
     @Test
-    @DisplayName("유효한 데이터로 회원가입 시 성공해야 함")
+    @DisplayName("유효한 데이터로 회원가입시 DB에 데이터가 저장되어야 함")
     public void testRegisterUser() {
+        // Given: 동일한 아이디(테스트계정)가 존재한다면 삭제하는 테스트 로직 추가
+
         // When: 회원가입 진행
         boolean result = UserDAO.registerUser("testUser", "password", "address", "M", "phone", "birth");
         
