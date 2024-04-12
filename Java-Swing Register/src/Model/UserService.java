@@ -14,9 +14,9 @@ public class UserService {
     }
 
     /* 사용자 삭제(회원 탈퇴) */
-    public static boolean deleteUser(String userId) {
+    public static boolean deleteUser(UserDTO userDTO) {
         try {
-            return UserDAO.deleteUser(userId);
+            return UserDAO.deleteUser(userDTO);
         } catch (Exception e) {
             System.out.println("오류 발생: " + e.getMessage());
             e.getStackTrace();
