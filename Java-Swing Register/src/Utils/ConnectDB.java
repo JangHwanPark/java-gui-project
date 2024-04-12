@@ -15,7 +15,11 @@ public class ConnectDB {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // DB 연결
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/JDBC", "root", "qwer1124");
+            conn = DriverManager.getConnection(
+                    System.getenv("DB_URL"),
+                    System.getenv("DB_USER"),
+                    System.getenv("DB_PASS")
+            );
 
             if (conn != null) {                     // Success: 연결 성공
                 System.out.println("데이터베이스에 성공적으로 연결되었습니다.");
