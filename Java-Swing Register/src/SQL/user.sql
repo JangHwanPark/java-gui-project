@@ -1,5 +1,5 @@
 # Create UserTable
-CREATE TABLE java_swing_register_member
+CREATE TABLE User
 (
     user_no  INT PRIMARY KEY AUTO_INCREMENT,
     user_id  VARCHAR(30) NOT NULL,
