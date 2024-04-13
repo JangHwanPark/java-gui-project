@@ -49,6 +49,9 @@ public class UserDAO {
              */
             System.out.println("삽입 작업이 완료되었습니다. 연결이 종료되었습니다.");
             return pstmt.executeUpdate() > 0;   // 6 > 0 = true
+        } catch (SQLException e) {
+            System.err.println("회원가입에 실패했습니다.: " + e.getMessage());
+            throw new SQLException("회원가입중 오류가 발생했습니다.", e);
         }
     }
 
