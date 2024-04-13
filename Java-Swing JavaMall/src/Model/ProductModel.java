@@ -1,12 +1,12 @@
-package product;
+package Model;
 
-public abstract class Product {
+public abstract class ProductModel {
     private int productId;
     private String productName;
     private String productImg;
     private String productState;
 
-    public Product(int productId, String productName, String productImg, String productState) {
+    public ProductModel(int productId, String productName, String productImg, String productState) {
         this.productId = productId;
         this.productName = productName;
         this.productImg = productImg;
@@ -40,6 +40,5 @@ public abstract class Product {
     public String getProductName() {
         return productName;
     }
-
 
 }
