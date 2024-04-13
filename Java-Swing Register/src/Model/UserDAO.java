@@ -50,6 +50,7 @@ public class UserDAO {
             System.out.println("삽입 작업이 완료되었습니다. 연결이 종료되었습니다.");
             return pstmt.executeUpdate() > 0;   // 6 > 0 = true
         } catch (SQLException e) {
+            // DebugLog
             System.err.println("회원가입에 실패했습니다.: " + e.getMessage());
             throw new SQLException("회원가입중 오류가 발생했습니다.", e);
         }
@@ -64,7 +65,7 @@ public class UserDAO {
             // sql 변수의 WHERE 절의 ? 에 필요한값 바인딩하기
             pstmt.setString(1, userDTO.getUserId());
 
-            // DELETE 문 실행: 삭제된 행의 수를 반환
+            // DebugLog: DELETE 문 실행 삭제된 행의 수를 반환
             System.out.println("삭제 작업이 완료되었습니다. 연결이 종료되었습니다.");
             return pstmt.executeUpdate() > 0;
         }
@@ -84,6 +85,7 @@ public class UserDAO {
                     users.add(selectUserResultSet(resultSet));
                 }
             }
+            // DebugLog
             System.out.println("전체 유저 조회 작업이 완료되었습니다. 연결이 종료되었습니다.");
         } catch (Exception e) {
             e.getStackTrace();
@@ -108,6 +110,23 @@ public class UserDAO {
         return null;  // 사용자가 존재하지 않는 경우
     }
 
+    public static boolean selectUserExists(String userId) throws SQLException {
+        String sql = "SELECT 1 FROM java_swing_register_member WHERE user_id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, userId);
+            try (ResultSet resultSet = pstmt.executeQuery()) {
+                // resultSet.next()는 결과 집합에 다음 행이 있으면 true를 반환
+                // 이 경우 사용자 ID에 해당하는 행이 존재
+                return resultSet.next();
+            }
+        } catch (SQLException e) {
+            System.err.println("사용자 존재 여부 확인 중 오류 발생: " + e.getMessage());
+            throw new SQLException("사용자 존재 여부 확인 중 오류 발생", e);
+        }
+    }
+
+
     /* userId 에 해당하는 사용자의 정보를 수정 */
     public static boolean updateUser(UserDTO userDTO) throws SQLException {
         // 어떤 정보도 null일 수 없다고 가정
@@ -126,7 +145,7 @@ public class UserDAO {
             pstmt.setString(3, userDTO.getPhone());
             pstmt.setString(4, userDTO.getUserId());
 
-            // UPDATE 문 실행: 업데이트된 행의 수를 반환
+            // DebugLog: UPDATE 문 실행 업데이트된 행의 수를 반환
             System.out.println("수정 작업이 완료되었습니다. 연결이 종료되었습니다.");
             return pstmt.executeUpdate() > 0;
         }
