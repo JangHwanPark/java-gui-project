@@ -1,12 +1,12 @@
 package Model;
 
-public abstract class ProductModel {
+public abstract class ProductDTO {
     private int productId;
     private String productName;
     private String productImg;
     private String productState;
 
-    public ProductModel(int productId, String productName, String productImg, String productState) {
+    public ProductDTO(int productId, String productName, String productImg, String productState) {
         this.productId = productId;
         this.productName = productName;
         this.productImg = productImg;
@@ -17,28 +17,32 @@ public abstract class ProductModel {
         this.productId = productId;
     }
 
-    public void setProductImg(String productImg) {
-        this.productImg = productImg;
+    public int getProductId() {
+        return productId;
     }
 
     public void setProductName(String productName) {
         this.productName = productName;
     }
 
-    public void setProductState(String productState) {
-        this.productState = productState;
+    public String getProductName() {
+        return productName;
     }
 
-    public int getProductId() {
-        return productId;
+    public void setProductImg(String productImg) {
+        this.productImg = productImg;
     }
 
     public String getProductImg() {
         return productImg;
     }
 
-    public String getProductName() {
-        return productName;
+    public void setProductState(String productState) {
+        this.productState = productState;
     }
 
+    public String getProductState() {
+        return productState;
+    }
 }
+
