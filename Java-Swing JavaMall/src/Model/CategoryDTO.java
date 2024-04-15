@@ -1,27 +1,27 @@
 package Model;
 
 public class CategoryDTO {
-    private int categoryNo;
-    private String categoryName;
+    private int category_no;
+    private String category_name;
 
-    public CategoryDTO(int categoryNo, String categoryName) {
-        this.categoryNo = categoryNo;
-        this.categoryName = categoryName;
+    public CategoryDTO(int category_no, String category_name) {
+        this.category_no = category_no;
+        this.category_name = category_name;
     }
 
     public String getCategoryName() {
-        return categoryName;
+        return category_name;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryName(String category_name) {
+        this.category_name = category_name;
     }
 
     public int getCategoryNo() {
-        return categoryNo;
+        return category_no;
     }
 
-    public void setCategoryNo(int categoryNo) {
-        this.categoryNo = categoryNo;
+    public void setCategoryNo(int category_no) {
+        this.category_no = category_no;
     }
 }
