@@ -1,18 +1,18 @@
 package Model;
 
-public abstract class ProductDTO {
+public abstract class IProducts {
     private int productId;
     private String productName;
     private String productImg;
     private String productState;
-
-    public ProductDTO(int productId, String productName, String productImg, String productState) {
+    // 제품 Product 생성자
+    public IProducts(int productId, String productName, String productImg, String productState) {
         this.productId = productId;
         this.productName = productName;
         this.productImg = productImg;
         this.productState = productState;
     }
-
+    // private 캡슐화된 필드를 가져오기 위한 get/set Methode
     public void setProductId(int productId) {
         this.productId = productId;
     }
@@ -43,6 +43,18 @@ public abstract class ProductDTO {
 
     public String getProductState() {
         return productState;
+    }
+
+    // 객체가 가지고 있는 정보를 문자열로 return 하기 위한 toString() 메서드
+    @Override
+    public String toString() {
+        return "Products: {" +
+                "\n\tproductId: " + productId +
+                "\n\tproductName: " + productName +
+                "\n\tproductImg: " + productImg +
+                "\n\tproductState: " + productState +
+                "\n}"
+               ;
     }
 }
 
