@@ -1,6 +1,7 @@
 package Model;
 
 public abstract class IProducts {
+    // 제품의 공통 필드 정의 (제품 id, 제품 이름, 제품 이름, 제품 상태)
     private int productId;
     private String productName;
     private String productImg;
