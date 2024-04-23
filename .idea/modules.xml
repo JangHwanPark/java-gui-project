@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Java-Swing JavaMall/Java-Swing JavaMall.iml" filepath="$PROJECT_DIR$/Java-Swing JavaMall/Java-Swing JavaMall.iml" />
       <module fileurl="file://$PROJECT_DIR$/Java-Swing Register/Java-Swing Register.iml" filepath="$PROJECT_DIR$/Java-Swing Register/Java-Swing Register.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Java-Swing-Layout/Java-Swing-Layout.iml" filepath="$PROJECT_DIR$/Java-Swing-Layout/Java-Swing-Layout.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/java-gui-project.iml" filepath="$PROJECT_DIR$/.idea/java-gui-project.iml" />
     </modules>
   </component>
