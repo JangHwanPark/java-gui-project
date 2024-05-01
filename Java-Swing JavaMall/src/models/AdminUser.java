@@ -1,4 +1,4 @@
-package model;
+package models;
 
 public class AdminUser extends User {
     // 관리자 권한을 나타내는 필드

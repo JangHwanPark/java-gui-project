@@ -1,6 +1,6 @@
 package test;
 
-import model.AdminUser;
+import models.AdminUser;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

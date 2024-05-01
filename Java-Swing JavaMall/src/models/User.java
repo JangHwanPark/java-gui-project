@@ -1,4 +1,4 @@
-package model;
+package models;
 
 public abstract class User {
     // Admin, Normal 사용자 공통 필드 정의
