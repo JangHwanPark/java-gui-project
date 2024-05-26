@@ -6,6 +6,10 @@
 
 ## Features
 
+### Create Model
+- [ ] User
+- [ ] Products
+
 ### Admin Features
 
 - [ ] 상품 관리
